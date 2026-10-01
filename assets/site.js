@@ -20,13 +20,13 @@
   var links=[].slice.call(document.querySelectorAll('a.zoom'));
   if(!links.length||typeof HTMLDialogElement==='undefined')return;
   var dlg=document.createElement('dialog'); dlg.className='lb'; dlg.setAttribute('aria-label','사진 크게 보기');
-  dlg.innerHTML='<div class="lb-in"><span class="lb-count"></span><img alt=""><p class="lb-cap"></p>'+
+  dlg.innerHTML='<div class="lb-in"><span class="lb-count" aria-live="polite"></span><a class="lb-original" target="_blank" rel="noopener">원본 열기 ↗</a><img alt=""><p class="lb-cap"></p>'+
     '<button type="button" class="x" aria-label="닫기">✕</button><button type="button" class="pv" aria-label="이전 사진">‹</button><button type="button" class="nx" aria-label="다음 사진">›</button></div>';
   document.body.appendChild(dlg);
   var im=dlg.querySelector('img'), cap=dlg.querySelector('.lb-cap'), cnt=dlg.querySelector('.lb-count'), cur=0;
   function show(i){
     cur=(i+links.length)%links.length; var a=links[cur], t=a.querySelector('img');
-    im.src=a.getAttribute('href'); im.alt=t?t.alt:'';
+    im.src=a.getAttribute('href'); im.alt=t?t.alt:''; dlg.querySelector('.lb-original').href=a.getAttribute('href');
     var c=(a.getAttribute('data-cap')||'').trim()||(t?t.alt:'')||'제품 사진'; cap.textContent=c; cnt.textContent=(cur+1)+' / '+links.length;
   }
   links.forEach(function(a,i){ a.addEventListener('click',function(e){ if(e.ctrlKey||e.metaKey||e.shiftKey)return; e.preventDefault(); show(i); dlg.showModal(); }); });
@@ -71,6 +71,21 @@
   [].slice.call(document.querySelectorAll('.catalog-jump a')).forEach(function(link){link.addEventListener('click',clearSearch);});
   window.addEventListener('hashchange',function(){var section=sections.filter(function(el){return '#'+el.id===location.hash;})[0];if(section&&section.hidden)clearSearch();});
   finder.hidden=false;filter();
+})();
+
+/* 시공사례 유형별 탐색 — 자바스크립트가 없으면 전체 사진을 표시 */
+(function(){
+ var bar=document.querySelector('.case-filter'); if(!bar)return;
+ var cards=[].slice.call(document.querySelectorAll('.case-index .case'));
+ var buttons=[].slice.call(bar.querySelectorAll('button[data-case-filter]'));
+ var status=document.getElementById('case-filter-status');
+ buttons.forEach(function(button){button.addEventListener('click',function(){
+  var key=button.getAttribute('data-case-filter'), count=0;
+  cards.forEach(function(card){var match=key==='all'||card.getAttribute('data-case-tags').split(' ').indexOf(key)!==-1; card.hidden=!match;if(match)count++;});
+  buttons.forEach(function(b){b.setAttribute('aria-pressed',b===button?'true':'false');});
+  status.textContent=button.textContent+' '+count+'건';
+ });});
+ bar.hidden=false;
 })();
 
 /* 방문자 수(사장님 09-30 "홈페이지에 방문자수 카운트 넣자 일일·주별·월간") — 파이어베이스 siteStats 에 익명 숫자만 쌓는다.
