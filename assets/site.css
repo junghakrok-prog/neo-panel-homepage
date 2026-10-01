@@ -282,7 +282,7 @@ table.spec td{font-variant-numeric:tabular-nums}
 @media (min-width:1024px){
   .hero-in{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-areas:". v" "a v" "b v" ". v";grid-template-rows:1fr auto auto 1fr;column-gap:52px;row-gap:18px;align-items:start;padding-top:64px;padding-bottom:60px}
   .hero-cta .btn{flex:0 0 auto}
-  .stage.home{--l:-7%;--t:-6%;--w:52%;margin-top:76px}
+  .stage.home{--l:-7%;--t:18%;--w:52%;margin-top:76px}
 }
 .stage.app .stage-photo{box-shadow:0 22px 50px rgba(40,70,100,.16)}
 @media (min-width:720px) and (max-width:1023.98px){.stage.app,.app-hero .steps-row{max-width:620px;margin-left:auto;margin-right:auto}}
