@@ -7,7 +7,7 @@
       mb.setAttribute('aria-expanded',o?'true':'false');
       mb.setAttribute('aria-label',o?'메뉴 닫기':'메뉴 열기');
     });
-    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&head.classList.contains('open')){head.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.focus();} });
+    document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&head.classList.contains('open')){head.classList.remove('open');mb.setAttribute('aria-expanded','false');mb.setAttribute('aria-label','메뉴 열기');mb.focus();} });
   }
   /* 옆으로 밀리는 메뉴 줄 — 지금 쪽 단추를 보이게 당겨 오고, 뒤에 더 있으면 오른쪽을 흐리게(더 있음 힌트) */
   [].slice.call(document.querySelectorAll('.subnav ul,.jump')).forEach(function(el){
@@ -27,7 +27,7 @@
   function show(i){
     cur=(i+links.length)%links.length; var a=links[cur], t=a.querySelector('img');
     im.src=a.getAttribute('href'); im.alt=t?t.alt:'';
-    var c=a.getAttribute('data-cap')||''; cap.textContent=c; cnt.textContent=(cur+1)+' / '+links.length;
+    var c=(a.getAttribute('data-cap')||'').trim()||(t?t.alt:'')||'제품 사진'; cap.textContent=c; cnt.textContent=(cur+1)+' / '+links.length;
   }
   links.forEach(function(a,i){ a.addEventListener('click',function(e){ if(e.ctrlKey||e.metaKey||e.shiftKey)return; e.preventDefault(); show(i); dlg.showModal(); }); });
   dlg.querySelector('.x').addEventListener('click',function(){dlg.close();});
