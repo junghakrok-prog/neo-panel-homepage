@@ -39,6 +39,40 @@
   dlg.addEventListener('touchend',function(e){ if(sx===null)return; var dx=e.changedTouches[0].clientX-sx; if(Math.abs(dx)>50)show(cur+(dx<0?1:-1)); sx=null; });
 })();
 
+/* 제품 목록 검색: 제품명·분류만 검색하며 서버 전송이나 저장은 하지 않는다. */
+(function(){
+  var finder=document.querySelector('.product-finder'), input=document.getElementById('product-search');
+  if(!finder||!input)return;
+  var reset=document.getElementById('product-search-reset'), status=document.getElementById('product-search-status');
+  var empty=document.querySelector('.product-search-empty'), sections=[].slice.call(document.querySelectorAll('#product-results .hub-cat'));
+  var items=[], timer, composing=false;
+  function normalize(value){return value.toLowerCase().replace(/판넬/g,'패널').replace(/[\s\-_\/·]+/g,'');}
+  sections.forEach(function(section){
+    var category=section.querySelector('h2').textContent;
+    [].slice.call(section.querySelectorAll('.hub-item')).forEach(function(link){
+      items.push({link:link,section:section,text:normalize(category+' '+link.querySelector('b').textContent)});
+    });
+  });
+  function filter(){
+    clearTimeout(timer);
+    var query=input.value.trim(), words=query.split(/\s+/).filter(Boolean).map(normalize), count=0;
+    items.forEach(function(item){var match=words.every(function(word){return item.text.indexOf(word)!==-1;});item.link.hidden=!match;if(match)count++;});
+    sections.forEach(function(section){section.hidden=!items.some(function(item){return item.section===section&&!item.link.hidden;});});
+    empty.hidden=count!==0;
+    status.textContent=query?'“'+query+'” 검색 결과 '+count+'개':'전체 '+items.length+'개 항목';
+  }
+  function clearSearch(){input.value='';filter();}
+  input.addEventListener('compositionstart',function(){composing=true;clearTimeout(timer);});
+  input.addEventListener('compositionend',function(){composing=false;filter();});
+  input.addEventListener('input',function(){if(!composing){clearTimeout(timer);timer=setTimeout(filter,180);}});
+  input.addEventListener('search',filter);
+  input.addEventListener('keydown',function(event){if(event.key==='Enter'&&!composing){event.preventDefault();filter();}});
+  reset.addEventListener('click',function(){clearSearch();input.focus();});
+  [].slice.call(document.querySelectorAll('.catalog-jump a')).forEach(function(link){link.addEventListener('click',clearSearch);});
+  window.addEventListener('hashchange',function(){var section=sections.filter(function(el){return '#'+el.id===location.hash;})[0];if(section&&section.hidden)clearSearch();});
+  finder.hidden=false;filter();
+})();
+
 /* 방문자 수(사장님 09-30 "홈페이지에 방문자수 카운트 넣자 일일·주별·월간") — 파이어베이스 siteStats 에 익명 숫자만 쌓는다.
    같은 사람은 날·주·달마다 한 번만 센다(이 브라우저의 localStorage 표시). 이름·연락처·IP 등 개인정보는 보내지 않는다.
    DB 규칙이 아직 없거나 막히면 조용히 숨긴다(화면 깨짐 없음). 한국 시간 기준, 주 = 월~일. */
