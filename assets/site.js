@@ -1,4 +1,45 @@
-/* ㈜네오판넬 홈페이지 — 최소 스크립트: 모바일 메뉴 · 사진 크게 보기 */
+/* ㈜네오판넬 홈페이지 — 최소 스크립트: 출처 꼬리표 넘기기 · 모바일 메뉴 · 사진 크게 보기 */
+
+/* 출처 꼬리표 넘기기(사장님 2026-10-06 QR·당근·거래처 카톡 홍보) — QR·당근 등으로 들어온 주소의
+   utm_source·utm_medium·utm_campaign 을 이 탭의 sessionStorage 에 기억해 두고(처음 들어온 값 우선),
+   쪽 안의 판넬견적3D 웹 링크와 구글 플레이 링크에 그대로 붙인다 → 앱 GA4 에서 '어느 QR·채널로 왔는지'가 잡힌다.
+   · 꼬리표 없이 들어오면 아무 링크도 바꾸지 않는다(기존 '홈페이지 유입' 집계 그대로).
+   · 앱 개인정보처리방침(privacy.html)·앱스토어 링크는 건드리지 않는다. 이미 꼬리표·referrer 가 있는 링크도 그대로 둔다.
+   · 외부로 보내는 것 없음, 개인정보 없음. 여기서 오류가 나도 아래 다른 기능은 그대로 돈다.
+   · 맨 앞에 두는 이유: 아래 블록이 오류로 멈춰도 이 블록은 먼저 끝나 있게. */
+(function(){
+  try{
+    var KEYS=['utm_source','utm_medium','utm_campaign'], SK='np_utm', APP_HOST='junghakrok-prog.github.io', PLAY_ID='com.neopanel.quote3d';
+    function clean(v){ v=String(v==null?'':v).replace(/[\u0000-\u001f\u007f]/g,'').trim(); return v.length>100?v.slice(0,100):v; }
+    function fromUrl(){
+      var q=new URLSearchParams(location.search), t={}, n=0;
+      KEYS.forEach(function(k){ var v=clean(q.get(k)); if(v){ t[k]=v; n++; } });
+      return n&&t.utm_source?t:null;
+    }
+    var tag=null;
+    try{ var s=sessionStorage.getItem(SK); if(s){ var p=JSON.parse(s); if(p&&typeof p.utm_source==='string'&&p.utm_source)tag=p; } }catch(e){}
+    if(!tag){ tag=fromUrl(); if(tag){ try{ sessionStorage.setItem(SK,JSON.stringify(tag)); }catch(e){} } }
+    if(!tag)return;
+    var pairs=[]; KEYS.forEach(function(k){ var v=clean(tag[k]); if(v)pairs.push(k+'='+encodeURIComponent(v)); });
+    if(!pairs.length)return;
+    function addQuery(href,extra){ var i=href.indexOf('#'), base=i<0?href:href.slice(0,i), hash=i<0?'':href.slice(i); return base+(base.indexOf('?')<0?'?':(/[?&]$/.test(base)?'':'&'))+extra+hash; }
+    [].slice.call(document.querySelectorAll('a[href]')).forEach(function(a){
+      try{
+        var raw=a.getAttribute('href'), u=new URL(raw,location.href);
+        if(u.protocol!=='https:'&&u.protocol!=='http:')return;
+        if(u.hostname===APP_HOST){
+          if(/\/privacy\.html$/i.test(u.pathname))return;
+          if(/(^|[?&])utm_[a-z]+=/i.test(u.search))return;
+          a.setAttribute('href',addQuery(raw,pairs.join('&')));
+        }else if(u.hostname==='play.google.com'&&u.pathname==='/store/apps/details'&&u.searchParams.get('id')===PLAY_ID){
+          if(u.searchParams.has('referrer'))return;
+          a.setAttribute('href',addQuery(raw,'referrer='+encodeURIComponent(pairs.join('&'))));
+        }
+      }catch(e){}
+    });
+  }catch(e){}
+})();
+
 (function(){
   var head=document.querySelector('.site-head'), mb=document.querySelector('.menu-btn');
   if(head&&mb){
