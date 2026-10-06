@@ -187,7 +187,7 @@
   document.head.appendChild(css);
   var bar = document.createElement('div');
   bar.className = 'a2hs'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', mobile ? '홈 화면에 추가' : '즐겨찾기 추가');
-  bar.innerHTML = '<div class="in"><img class="ic" src="/img/brand/icon-96.png" alt="">' +
+  bar.innerHTML = '<div class="in"><img class="ic" src="/img/brand/logo-96.png" alt="">' +
     '<div class="tx"><b>' + (mobile ? '홈 화면에 추가' : '네오판넬 즐겨찾기 추가') + '</b><span>' +
     (mobile ? '아이콘 한 번으로 바로 열려요' : '다음부터 한 번에 들어오세요') + '</span></div>' +
     '<button type="button" class="go">' + (mobile ? '추가하기' : '⭐ 추가하기') + '</button>' +
