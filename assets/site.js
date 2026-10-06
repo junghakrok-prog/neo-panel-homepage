@@ -4,7 +4,8 @@
    utm_source·utm_medium·utm_campaign 을 이 탭의 sessionStorage 에 기억해 두고(처음 들어온 값 우선),
    쪽 안의 판넬견적3D 웹 링크와 구글 플레이 링크에 그대로 붙인다 → 앱 GA4 에서 '어느 QR·채널로 왔는지'가 잡힌다.
    · 꼬리표 없이 들어오면 아무 링크도 바꾸지 않는다(기존 '홈페이지 유입' 집계 그대로).
-   · 앱 개인정보처리방침(privacy.html)·앱스토어 링크는 건드리지 않는다. 이미 꼬리표·referrer 가 있는 링크도 그대로 둔다.
+   · 앱 개인정보처리방침(privacy.html)·앱스토어 링크는 건드리지 않는다. 이미 꼬리표·referrer 가 있는 링크도 그대로 둔다
+     (단 app.html 플레이 버튼의 기본 referrer=utm_source=homepage 는 채널 값으로 바꾼다).
    · 외부로 보내는 것 없음, 개인정보 없음. 여기서 오류가 나도 아래 다른 기능은 그대로 돈다.
    · 맨 앞에 두는 이유: 아래 블록이 오류로 멈춰도 이 블록은 먼저 끝나 있게. */
 (function(){
@@ -32,8 +33,12 @@
           if(/(^|[?&])utm_[a-z]+=/i.test(u.search))return;
           a.setAttribute('href',addQuery(raw,pairs.join('&')));
         }else if(u.hostname==='play.google.com'&&u.pathname==='/store/apps/details'&&u.searchParams.get('id')===PLAY_ID){
+          var ref='referrer='+encodeURIComponent(pairs.join('&'));
+          /* app.html 의 기본 꼬리표(referrer=utm_source=homepage)만 채널 값으로 바꾼다 — QR·당근으로 온 손님이 '홈페이지'로 섞이지 않게.
+             그 밖의 referrer 는 그대로 둔다. */
+          if(u.searchParams.get('referrer')==='utm_source=homepage'){ a.setAttribute('href',raw.replace(/([?&])referrer=utm_source%3Dhomepage(?=&|#|$)/i,'$1'+ref)); return; }
           if(u.searchParams.has('referrer'))return;
-          a.setAttribute('href',addQuery(raw,'referrer='+encodeURIComponent(pairs.join('&'))));
+          a.setAttribute('href',addQuery(raw,ref));
         }
       }catch(e){}
     });
