@@ -195,16 +195,26 @@
   document.body.insertBefore(bar, document.body.firstChild);
   var tip = bar.querySelector('.tip');
   function show(h) { tip.innerHTML = h; tip.hidden = false; }
-  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; if (/[?&]a2hs=1/.test(location.search)) show('<b>「추가하기」</b>를 누르시면 바로 홈 화면에 설치됩니다.'); });
+  if (/[?&]a2hs=1/.test(location.search)) { try { localStorage.removeItem(KEY); } catch (e) {} }
   window.addEventListener('appinstalled', function () { bar.remove(); });
   bar.querySelector('.x').addEventListener('click', function () { try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {} bar.remove(); });
   bar.querySelector('.go').addEventListener('click', function () {
     if (deferred && mobile) { deferred.prompt(); deferred.userChoice.then(function (c) { if (c && c.outcome === 'accepted') bar.remove(); deferred = null; }); return; }
     if (mobile) {
+      // 안드로이드인데 이 브라우저(네이버·카톡 등)가 설치를 지원하지 않으면 → 크롬으로 바로 열어 설치 창을 띄운다
+      var android = /Android/i.test(ua), chromeLike = /Chrome\//.test(ua) && !/NAVER|KAKAOTALK|; wv\)|Instagram|FBAN|FBAV/i.test(ua);
+      if (android && !chromeLike && !/SamsungBrowser/i.test(ua)) {
+        var u = location.href.replace(/^https?:\/\//, '').split('#')[0];
+        u += (u.indexOf('?') < 0 ? '?' : '&') + 'a2hs=1';
+        location.href = 'intent://' + u + '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(location.href) + ';end';
+        show('크롬에서 열립니다. 크롬에서 <b>「추가하기」</b>를 한 번 더 누르시면 바로 설치됩니다.');
+        return;
+      }
       if (ios) show('아래쪽(또는 위쪽) <b>공유 버튼 ⬆︎</b>을 누르고 → <b>「홈 화면에 추가」</b>를 누르세요.');
       else if (/NAVER/i.test(ua)) show('오른쪽 아래 <b>메뉴(≡)</b> → <b>「홈 화면에 추가」</b>를 누르세요.');
       else if (/KAKAOTALK/i.test(ua)) show('오른쪽 위 <b>⋮</b> → <b>「다른 브라우저로 열기」</b>로 연 뒤, 메뉴에서 <b>「홈 화면에 추가」</b>를 누르세요.');
-      else show('브라우저 <b>메뉴(⋮ 또는 ≡)</b>에서 <b>「홈 화면에 추가」</b>를 누르세요.');
+      else show('잠시 뒤 다시 눌러 주세요. 계속 안 되면 오른쪽 위 <b>⋮</b> → <b>「홈 화면에 추가」</b>를 누르세요.');
     } else {
       show('키보드에서 <b>' + (mac ? '⌘ + D' : 'Ctrl + D') + '</b>를 함께 누르면 즐겨찾기에 추가됩니다.' +
         (deferred ? ' <button type="button" class="go" style="margin-left:8px;min-height:40px">🖥 바탕화면 아이콘 만들기</button>' :
