@@ -159,3 +159,58 @@
     if (got) box.hidden = false;
   }).catch(function () {});
 })();
+
+/* 최상단 '홈 화면에 추가 / 즐겨찾기 추가' 띠 (사장님 2026-10-06)
+   - 폰: 안드로이드 크롬·삼성인터넷은 설치 창을 바로 띄움, 아이폰·네이버앱 등은 방법 안내
+   - 컴퓨터: 즐겨찾기(Ctrl+D / ⌘+D) 안내 + 크롬·엣지면 바탕화면 바로가기(앱) 만들기
+   - 이미 홈 화면에서 연 경우·닫기 누른 뒤 30일은 안 보임 */
+(function () {
+  try { if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js').catch(function () {}); } catch (e) {}
+  var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone;
+  if (standalone) return;
+  var KEY = 'np-a2hs-hide';
+  try { var t = +localStorage.getItem(KEY) || 0; if (t && Date.now() - t < 30 * 864e5) return; } catch (e) {}
+  var ua = navigator.userAgent || '';
+  var mobile = /Android|iPhone|iPad|iPod|Mobile/i.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
+  var ios = /iPhone|iPad|iPod/i.test(ua) || (navigator.maxTouchPoints > 1 && /Macintosh/.test(ua));
+  var mac = /Mac/i.test(navigator.platform || ua);
+  var deferred = null;
+  var css = document.createElement('style');
+  css.textContent = '.a2hs{background:#172631;color:#fff;font-size:16px;line-height:1.4}' +
+    '.a2hs .in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}' +
+    '.a2hs .ic{width:36px;height:36px;border-radius:9px;flex:none}' +
+    '.a2hs .tx{flex:1;min-width:0;color:#fff}.a2hs .tx b{display:block;font-size:17px;color:#fff !important}.a2hs .tx span{display:block;font-size:14px;color:#dfe6ec !important}.a2hs .tip{color:#fff}' +
+    '.a2hs .go{background:#e67e22;color:#fff;border:0;border-radius:10px;padding:0 18px;min-height:48px;font-size:17px;font-weight:800;cursor:pointer;white-space:nowrap}' +
+    '.a2hs .x{background:none;border:0;color:#fff;opacity:.8;font-size:26px;min-width:44px;min-height:44px;cursor:pointer}' +
+    '.a2hs .tip{max-width:1180px;margin:0 auto;padding:0 16px 12px;font-size:16px;line-height:1.6}' +
+    '.a2hs .tip b{color:#ffb36b}';
+  document.head.appendChild(css);
+  var bar = document.createElement('div');
+  bar.className = 'a2hs'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', mobile ? '홈 화면에 추가' : '즐겨찾기 추가');
+  bar.innerHTML = '<div class="in"><img class="ic" src="/img/brand/icon-96.png" alt="">' +
+    '<div class="tx"><b>' + (mobile ? '홈 화면에 추가' : '네오판넬 즐겨찾기 추가') + '</b><span>' +
+    (mobile ? '아이콘 한 번으로 바로 열려요' : '다음부터 한 번에 들어오세요') + '</span></div>' +
+    '<button type="button" class="go">' + (mobile ? '추가하기' : '⭐ 추가하기') + '</button>' +
+    '<button type="button" class="x" aria-label="닫기">×</button></div><div class="tip" hidden></div>';
+  document.body.insertBefore(bar, document.body.firstChild);
+  var tip = bar.querySelector('.tip');
+  function show(h) { tip.innerHTML = h; tip.hidden = false; }
+  window.addEventListener('beforeinstallprompt', function (e) { e.preventDefault(); deferred = e; });
+  window.addEventListener('appinstalled', function () { bar.remove(); });
+  bar.querySelector('.x').addEventListener('click', function () { try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {} bar.remove(); });
+  bar.querySelector('.go').addEventListener('click', function () {
+    if (deferred && mobile) { deferred.prompt(); deferred.userChoice.then(function (c) { if (c && c.outcome === 'accepted') bar.remove(); deferred = null; }); return; }
+    if (mobile) {
+      if (ios) show('아래쪽(또는 위쪽) <b>공유 버튼 ⬆︎</b>을 누르고 → <b>「홈 화면에 추가」</b>를 누르세요.');
+      else if (/NAVER/i.test(ua)) show('오른쪽 아래 <b>메뉴(≡)</b> → <b>「홈 화면에 추가」</b>를 누르세요.');
+      else if (/KAKAOTALK/i.test(ua)) show('오른쪽 위 <b>⋮</b> → <b>「다른 브라우저로 열기」</b>로 연 뒤, 메뉴에서 <b>「홈 화면에 추가」</b>를 누르세요.');
+      else show('브라우저 <b>메뉴(⋮ 또는 ≡)</b>에서 <b>「홈 화면에 추가」</b>를 누르세요.');
+    } else {
+      show('키보드에서 <b>' + (mac ? '⌘ + D' : 'Ctrl + D') + '</b>를 함께 누르면 즐겨찾기에 추가됩니다.' +
+        (deferred ? ' <button type="button" class="go" style="margin-left:8px;min-height:40px">🖥 바탕화면 아이콘 만들기</button>' :
+         (/Chrome|Edg/i.test(ua) ? ' 바탕화면 아이콘을 원하시면 주소창 오른쪽 <b>설치(⊕) 아이콘</b>을 누르세요.' : '')));
+      var b2 = tip.querySelector('.go');
+      if (b2) b2.addEventListener('click', function () { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; }); });
+    }
+  });
+})();

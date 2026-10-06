@@ -1,0 +1,15 @@
+{
+  "name": "㈜네오판넬 — 판넬·사이딩·3D 견적",
+  "short_name": "네오판넬",
+  "description": "샌드위치판넬·컬러강판·부자재·사이딩 제품 안내와 판넬견적3D",
+  "start_url": "/?utm_source=a2hs&utm_medium=homescreen",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e67e22",
+  "lang": "ko",
+  "icons": [
+    {"src": "/img/brand/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+    {"src": "/img/brand/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"}
+  ]
+}
