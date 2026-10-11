@@ -179,7 +179,7 @@
   css.textContent = '.a2hs{background:#172631;color:#fff;font-size:16px;line-height:1.4}' +
     '.a2hs .in{max-width:1180px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px}' +
     '.a2hs .ic{width:36px;height:36px;border-radius:9px;flex:none}' +
-    '.a2hs .tx{flex:1;min-width:0;color:#fff}.a2hs .tx b{display:block;font-size:17px;color:#fff !important}.a2hs .tx span{display:block;font-size:14px;color:#dfe6ec !important}.a2hs .tip{color:#fff}' +
+    '.a2hs .tx{flex:1;min-width:0;color:#fff}.a2hs .tx b{display:block;font-size:17px;color:#fff !important}.a2hs .tx span{display:block;font-size:15.5px;color:#dfe6ec !important}.a2hs .tip{color:#fff}' +
     '.a2hs .go{background:#e67e22;color:#fff;border:0;border-radius:10px;padding:0 18px;min-height:48px;font-size:17px;font-weight:800;cursor:pointer;white-space:nowrap}' +
     '.a2hs .x{background:none;border:0;color:#fff;opacity:.8;font-size:26px;min-width:44px;min-height:44px;cursor:pointer}' +
     '.a2hs .tip{max-width:1180px;margin:0 auto;padding:0 16px 12px;font-size:16px;line-height:1.6}' +
@@ -190,7 +190,7 @@
   bar.innerHTML = '<div class="in"><img class="ic" src="/img/brand/logo-96.png" alt="">' +
     '<div class="tx"><b>' + (mobile ? '홈 화면에 추가' : '네오판넬 즐겨찾기 추가') + '</b><span>' +
     (mobile ? '아이콘 한 번으로 바로 열려요' : '다음부터 한 번에 들어오세요') + '</span></div>' +
-    '<button type="button" class="go">' + (mobile ? '추가하기' : '⭐ 추가하기') + '</button>' +
+    '<button type="button" class="go">' + '추가하기' + '</button>' +
     '<button type="button" class="x" aria-label="닫기">×</button></div><div class="tip" hidden></div>';
   document.body.insertBefore(bar, document.body.firstChild);
   var tip = bar.querySelector('.tip');
@@ -211,13 +211,13 @@
         show('크롬에서 열립니다. 크롬에서 <b>「추가하기」</b>를 한 번 더 누르시면 바로 설치됩니다.');
         return;
       }
-      if (ios) show('아래쪽(또는 위쪽) <b>공유 버튼 ⬆︎</b>을 누르고 → <b>「홈 화면에 추가」</b>를 누르세요.');
+      if (ios) show('아래쪽(또는 위쪽) <b>공유 버튼(네모에 위 화살표 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-4px;margin:0 2px"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 12v8h14v-8"/></svg>)</b>을 누르고 → <b>「홈 화면에 추가」</b>를 누르세요.');
       else if (/NAVER/i.test(ua)) show('오른쪽 아래 <b>메뉴(≡)</b> → <b>「홈 화면에 추가」</b>를 누르세요.');
       else if (/KAKAOTALK/i.test(ua)) show('오른쪽 위 <b>⋮</b> → <b>「다른 브라우저로 열기」</b>로 연 뒤, 메뉴에서 <b>「홈 화면에 추가」</b>를 누르세요.');
       else show('잠시 뒤 다시 눌러 주세요. 계속 안 되면 오른쪽 위 <b>⋮</b> → <b>「홈 화면에 추가」</b>를 누르세요.');
     } else {
       show('키보드에서 <b>' + (mac ? '⌘ + D' : 'Ctrl + D') + '</b>를 함께 누르면 즐겨찾기에 추가됩니다.' +
-        (deferred ? ' <button type="button" class="go" style="margin-left:8px;min-height:40px">🖥 바탕화면 아이콘 만들기</button>' :
+        (deferred ? ' <button type="button" class="go" style="margin-left:8px;min-height:44px">바탕화면 아이콘 만들기</button>' :
          (/Chrome|Edg/i.test(ua) ? ' 바탕화면 아이콘을 원하시면 주소창 오른쪽 <b>설치(⊕) 아이콘</b>을 누르세요.' : '')));
       var b2 = tip.querySelector('.go');
       if (b2) b2.addEventListener('click', function () { deferred.prompt(); deferred.userChoice.then(function () { deferred = null; }); });
