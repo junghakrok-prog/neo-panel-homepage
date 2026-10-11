@@ -134,31 +134,7 @@
  bar.hidden=false;
 })();
 
-/* 방문자 수(사장님 09-30 "홈페이지에 방문자수 카운트 넣자 일일·주별·월간") — 파이어베이스 siteStats 에 익명 숫자만 쌓는다.
-   같은 사람은 날·주·달마다 한 번만 센다(이 브라우저의 localStorage 표시). 이름·연락처·IP 등 개인정보는 보내지 않는다.
-   DB 규칙이 아직 없거나 막히면 조용히 숨긴다(화면 깨짐 없음). 한국 시간 기준, 주 = 월~일. */
-(function () {
-  var box = document.getElementById('np-visits'); if (!box || !window.fetch) return;
-  var P = 'neopanel-app', KEY = 'AIzaSyCpJEeFn-CAaIkF5-lRc6ADsJfx3SJ3_p4';
-  var BASE = 'https://firestore.googleapis.com/v1/projects/' + P + '/databases/(default)/documents';
-  var kst = new Date(Date.now() + 9 * 3600e3), y = kst.getUTCFullYear(), mo = kst.getUTCMonth() + 1, da = kst.getUTCDate();
-  function z(n) { return (n < 10 ? '0' : '') + n; }
-  var dow = (kst.getUTCDay() + 6) % 7, mon = new Date(Date.UTC(y, mo - 1, da - dow));
-  var ids = { d: 'd_' + y + '-' + z(mo) + '-' + z(da), w: 'w_' + mon.getUTCFullYear() + '-' + z(mon.getUTCMonth() + 1) + '-' + z(mon.getUTCDate()), m: 'm_' + y + '-' + z(mo) };
-  function seen(k) { try { var v = localStorage.getItem('np_v_' + k) === ids[k]; if (!v) localStorage.setItem('np_v_' + k, ids[k]); return v; } catch (e) { return true; } }
-  var writes = [];
-  ['d', 'w', 'm'].forEach(function (k) {
-    if (!seen(k)) writes.push({ update: { name: 'projects/' + P + '/databases/(default)/documents/siteStats/' + ids[k], fields: {} }, updateMask: { fieldPaths: [] }, updateTransforms: [{ fieldPath: 'c', increment: { integerValue: '1' } }] });
-  });
-  var go = writes.length ? fetch(BASE + ':commit?key=' + KEY, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ writes: writes }) }).catch(function () {}) : Promise.resolve();
-  go.then(function () {
-    return fetch(BASE + ':batchGet?key=' + KEY, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ documents: ['d', 'w', 'm'].map(function (k) { return 'projects/' + P + '/databases/(default)/documents/siteStats/' + ids[k]; }) }) });
-  }).then(function (r) { return r && r.ok ? r.json() : null; }).then(function (arr) {
-    if (!arr) return; var got = 0;
-    arr.forEach(function (x) { if (!x.found) return; var id = x.found.name.split('/').pop(), k = id.charAt(0), c = +((x.found.fields || {}).c || {}).integerValue || 0; var el = box.querySelector('[data-k="' + k + '"]'); if (el) { el.textContent = c.toLocaleString('ko-KR'); got++; } });
-    if (got) box.hidden = false;
-  }).catch(function () {});
-})();
+/* 방문자 수 표시는 2026-10-11 뺐다 — 파이어베이스 siteStats 규칙이 막혀(403) 숫자가 안 나오고 오류 요청만 생겼다. 규칙은 손대지 않음. */
 
 /* 최상단 '홈 화면에 추가 / 즐겨찾기 추가' 띠 (사장님 2026-10-06)
    - 폰: 안드로이드 크롬·삼성인터넷은 설치 창을 바로 띄움, 아이폰·네이버앱 등은 방법 안내
@@ -225,7 +201,7 @@
   });
 })();
 
-/* 2026-10-11 시안 — 「3D 견적」 칸 실제 앱 화면 넘김: 4초마다 자동(화면에 보일 때만), 손대면 멈춤, 화살표·밀기 */
+/* 2026-10-11 시안 — 「3D 견적」 칸 실제 앱 화면 넘김: 1.5초마다 자동(앱 홈과 같게 — 사장님 "2.5초는 너무 늦다 1.5초로")(화면에 보일 때만), 손대면 멈춤, 화살표·밀기 */
 (function () {
   var reel = document.querySelector('.intro-reel'); if (!reel) return;
   var track = reel.querySelector('.reel-track'), slides = reel.querySelectorAll('.reel-slide');
@@ -244,5 +220,5 @@
   track.addEventListener('scroll', function () { var i = idx(); if (target >= 0) { if (i === target) target = -1; return; } if (i !== cur) { cur = i; upd(); } }, { passive: true });
   track.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { setPlay(false); go(cur + 1); } else if (e.key === 'ArrowLeft') { setPlay(false); go(cur - 1); } });
   try { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(track); } catch (e) { visible = true; }
-  setPlay(playing); upd(); timer = setInterval(tick, 4000);
+  setPlay(playing); upd(); timer = setInterval(tick, 1500);
 })();

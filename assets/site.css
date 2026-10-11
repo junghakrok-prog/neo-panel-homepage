@@ -597,8 +597,6 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 @media (min-width:1200px){.app-left .host img{height:200px}}
 .greet-doc.one{grid-template-columns:1fr!important;max-width:880px}
 .greet-card .name{white-space:nowrap;font-size:clamp(34px,8.4vw,60px)}
-.site-foot .visits{margin-top:10px;font-size:15px;color:#5c6166}
-.site-foot .visits b{color:#1d2328;font-weight:800}
 .head-prod{min-height:44px;padding:0 16px;font-size:16px;border-radius:10px;border:1.5px solid var(--orange);color:var(--orange-text);background:#fff;font-weight:800}
 .head-prod:hover{background:#fff4e6}
 @media (max-width:1023px){.head-call{display:none}}
@@ -899,7 +897,7 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 .crumbs a{min-height:44px}
 .jump a{min-height:46px}
 
-/* 2026-10-11 시안 — 「3D 견적」 칸 실제 앱 화면 14장 넘김(앱 홈 소개 사진과 같은 사진·같은 설명) */
+/* 2026-10-11 시안 — 「3D 견적」 칸 실제 앱 화면 13장 넘김(앱 홈 소개 사진과 같은 사진·같은 설명, 1.5초) */
 .intro-reel{margin-top:34px;background:#fff;border:1px solid #dde5ea;border-radius:22px;padding:26px 26px 28px}
 .reel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px}
 .reel-kicker{color:var(--orange-text);font-weight:800;font-size:16px}
@@ -929,3 +927,8 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 }
 @media (prefers-reduced-motion:reduce){.reel-track{scroll-behavior:auto}}
 @media (min-width:720px){.reel-track,.reel-bar{max-width:min(100%,calc((100vh - 360px)*16/9));margin-left:auto;margin-right:auto}.reel-bar{margin-top:16px}}
+
+/* 2026-10-11 — 앱 그림 속 금액이 예시임을 표시(사장님 확인) */
+.stage-app .shot-note{position:absolute;right:4%;bottom:0;z-index:2;transform:translateY(calc(100% + 6px));white-space:nowrap;font-size:14px;font-weight:700;color:#1d2328;background:rgba(255,255,255,.94);padding:3px 10px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.app-large-screen .price-note{display:block;margin-top:8px;font-size:15px;font-weight:600;color:#576c78;text-align:right}
+@media(max-width:719.98px){.stage-app .shot-note{right:3%;transform:translateY(50%);font-size:14px}}
