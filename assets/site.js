@@ -224,3 +224,25 @@
     }
   });
 })();
+
+/* 2026-10-11 시안 — 「3D 견적」 칸 실제 앱 화면 넘김: 4초마다 자동(화면에 보일 때만), 손대면 멈춤, 화살표·밀기 */
+(function () {
+  var reel = document.querySelector('.intro-reel'); if (!reel) return;
+  var track = reel.querySelector('.reel-track'), slides = reel.querySelectorAll('.reel-slide');
+  var bar = reel.querySelector('.reel-bar span'), playBtn = reel.querySelector('.reel-play');
+  var n = slides.length, cur = 0, playing = !(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches), visible = false, timer = null;
+  function idx() { return Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); }
+  var target = -1, tgtT = 0;
+  function go(i) { cur = (i + n) % n; target = cur; clearTimeout(tgtT); tgtT = setTimeout(function () { target = -1; }, 900); track.scrollTo({ left: cur * track.clientWidth }); upd(); }
+  function upd() { bar.style.width = ((cur + 1) / n * 100) + '%'; }
+  function setPlay(p) { playing = p; playBtn.textContent = p ? '멈춤' : '자동'; playBtn.setAttribute('aria-label', p ? '자동 넘김 멈춤' : '자동 넘김 다시 시작'); }
+  function tick() { if (playing && visible && !document.hidden) go(cur + 1); }
+  reel.querySelector('.reel-prev').addEventListener('click', function () { setPlay(false); go(cur - 1); });
+  reel.querySelector('.reel-next').addEventListener('click', function () { setPlay(false); go(cur + 1); });
+  playBtn.addEventListener('click', function () { setPlay(!playing); });
+  track.addEventListener('pointerdown', function () { setPlay(false); }, { passive: true });
+  track.addEventListener('scroll', function () { var i = idx(); if (target >= 0) { if (i === target) target = -1; return; } if (i !== cur) { cur = i; upd(); } }, { passive: true });
+  track.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { setPlay(false); go(cur + 1); } else if (e.key === 'ArrowLeft') { setPlay(false); go(cur - 1); } });
+  try { new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, { threshold: 0.4 }).observe(track); } catch (e) { visible = true; }
+  setPlay(playing); upd(); timer = setInterval(tick, 4000);
+})();

@@ -898,3 +898,34 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 .foot-links a{min-height:44px}
 .crumbs a{min-height:44px}
 .jump a{min-height:46px}
+
+/* 2026-10-11 시안 — 「3D 견적」 칸 실제 앱 화면 14장 넘김(앱 홈 소개 사진과 같은 사진·같은 설명) */
+.intro-reel{margin-top:34px;background:#fff;border:1px solid #dde5ea;border-radius:22px;padding:26px 26px 28px}
+.reel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px}
+.reel-kicker{color:var(--orange-text);font-weight:800;font-size:16px}
+.reel-head h3{font-size:30px;letter-spacing:-.03em;margin:6px 0 6px}
+.reel-head p{font-size:17px;color:var(--muted)}
+.reel-nav{display:flex;gap:10px;flex:none}
+.reel-nav button{min-width:56px;min-height:56px;border-radius:14px;border:1.5px solid var(--line-2);background:#fff;color:var(--ink);font:inherit;font-size:17px;font-weight:800;display:grid;place-items:center;cursor:pointer;padding:0 14px}
+.reel-nav button:hover{border-color:var(--ink)}
+.reel-track{display:grid;grid-auto-flow:column;grid-auto-columns:100%;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;scrollbar-width:none;border-radius:14px;outline-offset:4px}
+.reel-track::-webkit-scrollbar{display:none}
+.reel-slide{scroll-snap-align:start;margin:0;min-width:0;position:relative}
+.reel-slide img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:14px;border:1px solid #e2e7ea;background:#eef2f4}
+.reel-slide figcaption{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:16px 4px 0}
+.reel-no{font-size:16px;font-weight:800;color:#fff;background:var(--action);border-radius:100px;padding:3px 12px}
+.reel-a{font-size:20px;color:var(--muted);font-weight:700}
+.reel-slide strong{font-size:24px;letter-spacing:-.02em}
+.reel-slide small{flex-basis:100%;font-size:16px;color:var(--muted)}
+.reel-bar{height:6px;background:#e6ecef;border-radius:6px;margin-top:16px;overflow:hidden}
+.reel-bar span{display:block;height:100%;width:7%;background:var(--orange);border-radius:6px;transition:width .3s}
+.reel-cta{margin-top:20px;width:100%;min-height:60px;font-size:20px}
+@media (max-width:719.98px){
+  .intro-reel{padding:18px 14px 20px;border-radius:18px;margin-top:24px}
+  .reel-head{flex-direction:column;align-items:stretch}
+  .reel-head h3{font-size:26px}
+  .reel-nav{justify-content:space-between}.reel-nav button{flex:1}
+  .reel-a{font-size:18px}.reel-slide strong{font-size:21px}
+}
+@media (prefers-reduced-motion:reduce){.reel-track{scroll-behavior:auto}}
+@media (min-width:720px){.reel-track,.reel-bar{max-width:min(100%,calc((100vh - 360px)*16/9));margin-left:auto;margin-right:auto}.reel-bar{margin-top:16px}}
