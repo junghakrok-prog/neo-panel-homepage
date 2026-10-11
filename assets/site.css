@@ -526,7 +526,7 @@ a.cl:hover{border-color:var(--ink)}
 .site-foot{background:linear-gradient(180deg,#f6f3ec,#efebe2);color:#4a5056;padding:44px 0 36px;font-size:15px;line-height:1.8;border-top:1px solid var(--line)}
 .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:18px;padding-bottom:22px;border-bottom:1px solid var(--line-2)}
 .foot-top .logo-txt b{color:var(--ink)}
-.foot-top .logo-txt small{letter-spacing:.02em;font-size:12px}
+.foot-top .logo-txt small{letter-spacing:.02em;font-size:15px}
 .foot-links{display:flex;flex-wrap:wrap;gap:4px 18px;align-items:center}
 .foot-links a{text-decoration:none;color:#2b3137;font-weight:600;display:inline-flex;align-items:center;min-height:40px}
 .foot-links a:hover{text-decoration:underline}
