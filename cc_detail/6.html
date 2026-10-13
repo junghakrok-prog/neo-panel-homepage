@@ -26,6 +26,33 @@
 <link rel="stylesheet" href="../assets/site.css?v=polish-20261011">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.neo-panel.com/"}, {"@type": "ListItem", "position": 2, "name": "기업시공사례", "item": "https://www.neo-panel.com/company_construction"}, {"@type": "ListItem", "position": 3, "name": "예산군 신양면 새건축 현장"}]}</script>
 <link rel="manifest" href="/manifest.webmanifest">
+<!-- 방문 계측 GA4(사장님 2026-10-13 승인 「제안사항 다 해라」) — 화면에 보이는 것 없음 · 개인정보 수집 없음.
+     앱과 같은 측정 ID. www.neo-panel.com·neo-panel.com 에서만 전송(로컬 시험·미리보기는 0). 앱으로 가는 버튼 클릭 = homepage_to_app(where=누른 자리, dest=web·play·apple). -->
+<script>
+(function(){
+  try{
+    var h=location.hostname; if(h!=='www.neo-panel.com'&&h!=='neo-panel.com')return;
+    var ID='G-PTW1V2MFM6', s=document.createElement('script'); s.async=true; s.src='https://www.googletagmanager.com/gtag/js?id='+ID; document.head.appendChild(s);
+    window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} window.gtag=gtag;
+    gtag('js',new Date()); gtag('config',ID);
+    document.addEventListener('click',function(e){
+      try{
+        var a=e.target&&e.target.closest?e.target.closest('a[href]'):null; if(!a)return;
+        var u=new URL(a.getAttribute('href'),location.href), dest='';
+        if(u.hostname==='junghakrok-prog.github.io'){ if(/\/privacy\.html$/i.test(u.pathname))return; dest='web'; }
+        else if(u.hostname==='play.google.com'&&u.searchParams.get('id')==='com.neopanel.quote3d')dest='play';
+        else if(u.hostname==='apps.apple.com'&&/id6807864957/.test(u.pathname))dest='apple';
+        else return;
+        var where='';
+        if(a.classList.contains('head-cta'))where='header';
+        else{ var p=a.closest('[id]'); if(p&&p.id&&p.id!=='main')where=p.id; else{ var c=a.closest('section,footer,aside,header'); where=c?(c.tagName.toLowerCase()+(c.className?'.'+String(c.className).split(' ')[0]:'')):'body'; } }
+        where=(where+'|'+(a.className?String(a.className).split(' ').filter(function(x){return x!=='btn';}).join('.'):'a')).slice(0,90);
+        gtag('event','homepage_to_app',{where:where,dest:dest});
+      }catch(err){}
+    },true);
+  }catch(e){}
+})();
+</script>
 </head>
 <body class="case-detail">
 <a class="skip" href="#main">본문 바로가기</a>
