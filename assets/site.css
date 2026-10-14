@@ -932,3 +932,6 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 .stage-app .shot-note{position:absolute;right:4%;bottom:0;z-index:2;transform:translateY(calc(100% + 6px));white-space:nowrap;font-size:14px;font-weight:700;color:#1d2328;background:rgba(255,255,255,.94);padding:3px 10px;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
 .app-large-screen .price-note{display:block;margin-top:8px;font-size:15px;font-weight:600;color:#576c78;text-align:right}
 @media(max-width:719.98px){.stage-app .shot-note{right:3%;transform:translateY(50%);font-size:14px}}
+/* 2026-10-14 머리 메뉴 「영상」 추가 — 1024~1199px 에서 메뉴 글자가 두 줄로 꺾이지 않게 간격만 줄임 */
+.nav>li>a,.head-tel{white-space:nowrap}
+@media (min-width:1024px) and (max-width:1199.98px){.nav{margin-left:12px}.nav>li>a{padding:8px 8px}}
