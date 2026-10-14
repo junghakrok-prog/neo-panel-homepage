@@ -935,3 +935,22 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 /* 2026-10-14 머리 메뉴 「영상」 추가 — 1024~1199px 에서 메뉴 글자가 두 줄로 꺾이지 않게 간격만 줄임 */
 .nav>li>a,.head-tel{white-space:nowrap}
 @media (min-width:1024px) and (max-width:1199.98px){.nav{margin-left:12px}.nav>li>a{padding:8px 8px}}
+/* 2026-10-14 아이콘 시안 — 사진·문구는 그대로, 아이콘은 보조로만 (사장님 10-14 「다 넣어봐」 · 「소프트3d스타일이 맘에든다」)
+   nx-soft = 소프트 3D 그림(둥근 타일) · 그 밖의 nx-ico = 판넬 입체형(아이소메트릭) SVG. 한 칸 안에서는 한 가지만 쓴다 */
+.nx-ico{display:block;flex:none;max-width:none}
+.nx-soft{border-radius:16px;box-shadow:0 3px 10px rgba(40,30,20,.12);object-fit:cover}
+.resource-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:14px}
+.resource-top .resource-index{margin-bottom:0}
+.resource-top .nx-ico{width:60px;height:60px;margin:-12px -8px 0 0}
+.ais-head{display:flex;align-items:center;gap:16px}
+.ais-head .nx-ico{width:64px;height:64px}
+.str.has-ico{display:grid;grid-template-columns:64px minmax(0,1fr);gap:16px;align-items:start}
+.str.has-ico .nx-ico{width:64px;height:64px}
+.call-card.has-ico{position:relative}
+.call-card.has-ico .nx-ico{position:absolute;right:16px;bottom:14px;width:64px;height:64px;border:3px solid #fff}
+.steps3 li>.nx-ico{width:48px;height:48px}
+.who div.has-ico{display:flex;gap:12px;align-items:flex-start}
+.who div.has-ico .nx-ico{width:48px;height:48px;margin-top:2px}
+.cta-txt{display:grid;grid-template-columns:72px minmax(0,1fr);column-gap:18px;align-items:center}
+.cta-txt .nx-ico{grid-row:1 / span 2;width:72px;height:72px}
+@media (max-width:479.98px){.cta-txt{grid-template-columns:56px minmax(0,1fr);column-gap:12px}.cta-txt .nx-ico{width:56px;height:56px;align-self:start}.steps3 li>.nx-ico{width:42px;height:42px}.str.has-ico{grid-template-columns:56px minmax(0,1fr);gap:14px}.str.has-ico .nx-ico{width:56px;height:56px}}
