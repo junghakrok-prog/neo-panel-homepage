@@ -936,7 +936,9 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 .nav>li>a,.head-tel{white-space:nowrap}
 @media (min-width:1024px) and (max-width:1199.98px){.nav{margin-left:12px}.nav>li>a{padding:8px 8px}}
 /* 2026-10-14 아이콘 시안 — 사진·문구는 그대로, 아이콘은 보조로만 (사장님 10-14 「다 넣어봐」 · 「소프트3d스타일이 맘에든다」)
-   nx-soft = 소프트 3D 그림(둥근 타일) · 그 밖의 nx-ico = 판넬 입체형(아이소메트릭) SVG. 한 칸 안에서는 한 가지만 쓴다 */
+   nx-soft = 소프트 3D 그림(둥근 타일) · nx-s3 = 소프트 3D 그림(투명 바탕, 3차 본 세트). 한 칸 안에서는 한 가지만 쓴다
+   2026-10-15 사장님 승인(「넣어」) 때 아이소메트릭 SVG 17종·성처럼 보이던 3D 건물 그림을 소프트 3D 로 바꿈 */
+.nx-s3{object-fit:contain}
 .nx-ico{display:block;flex:none;max-width:none}
 .nx-soft{border-radius:16px;box-shadow:0 3px 10px rgba(40,30,20,.12);object-fit:cover}
 .resource-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:14px}
