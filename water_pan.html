@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css?v=icons-20261015">
+<link rel="stylesheet" href="assets/site.css?v=cta-20261015">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.neo-panel.com/"}, {"@type": "ListItem", "position": 2, "name": "제품소개", "item": "https://www.neo-panel.com/products"}, {"@type": "ListItem", "position": 3, "name": "부자재", "item": "https://www.neo-panel.com/products#acc"}, {"@type": "ListItem", "position": 4, "name": "물받이시스템"}]}</script>
 <link rel="manifest" href="/manifest.webmanifest">
 <!-- 방문 계측 GA4(사장님 2026-10-13 승인 「제안사항 다 해라」) — 화면에 보이는 것 없음 · 개인정보 수집 없음.
@@ -38,6 +38,14 @@
     document.addEventListener('click',function(e){
       try{
         var a=e.target&&e.target.closest?e.target.closest('a[href]'):null; if(!a)return;
+        var ctaWhere=a.getAttribute('data-product-cta');
+        if(ctaWhere==='product_cta'||ctaWhere==='sticky_bar'){
+          var ctaUrl=new URL(a.getAttribute('href'),location.href), ctaDest='';
+          if(ctaUrl.protocol==='tel:')ctaDest='call';
+          else if(ctaUrl.hostname==='open.kakao.com')ctaDest='kakao';
+          else if(ctaUrl.hostname==='junghakrok-prog.github.io')ctaDest='web';
+          if(ctaDest){gtag('event','homepage_to_app',{where:ctaWhere,dest:ctaDest});return;}
+        }
         var u=new URL(a.getAttribute('href'),location.href), dest='';
         if(u.hostname==='junghakrok-prog.github.io'){ if(/\/privacy\.html$/i.test(u.pathname))return; dest='web'; }
         else if(u.hostname==='play.google.com'&&u.searchParams.get('id')==='com.neopanel.quote3d')dest='play';
@@ -99,7 +107,18 @@
   <aside class="side" aria-label="부자재 메뉴"><div class="side-box"><h2>부자재</h2><ul><li><a href="flashing.html">후레싱</a></li><li><a href="water_pan.html" aria-current="page">물받이시스템</a></li><li><a href="clean_room.html">크린룸자재</a></li><li><a href="panel_accessories.html">부속자재</a></li></ul></div><div class="side-help"><b>전화 상담</b><a class="tel" href="tel:041-548-0484">041-548-0484</a><a class="btn btn-primary" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener">3D로 바로 견적 →</a></div></aside>
   <article class="content">
 <h1>물받이시스템</h1>
-<p class="lead">건물의 지붕이나 외벽을 따라 빗물을 모아 배수하는 구조물로, 건물 손상을 방지하고 물을 효율적으로 처리하는 역할을 합니다.</p><div class="detail-tools"><div><b>자료 바로보기</b><span>13개 이미지 · 누르면 크게 볼 수 있습니다</span></div><nav aria-label="이 제품의 자료 바로가기"><a href="#detail-images">사진·도면 <span aria-hidden="true">↓</span></a><a href="#detail-diagram-1">물받이시스템 상세도 <span aria-hidden="true">↓</span></a></nav></div>
+<p class="lead">건물의 지붕이나 외벽을 따라 빗물을 모아 배수하는 구조물로, 건물 손상을 방지하고 물을 효율적으로 처리하는 역할을 합니다.</p>
+<section class="product-cta" id="product_cta" aria-labelledby="product-cta-title">
+  <p class="product-cta-label">자재 견적 · 전문가 상담</p>
+  <h2 id="product-cta-title">이 자재 견적이 필요하신가요?</h2>
+  <p class="product-cta-copy">필요한 자재의 규격과 수량을 알려주시면 전문가 상담을 도와드립니다.</p>
+  <div class="product-cta-actions">
+    <a class="product-cta-call" href="tel:041-548-0484" data-product-cta="product_cta"><span>전화 견적 문의</span><span class="product-cta-phone">041-548-0484</span></a>
+    <a class="product-cta-kakao" href="https://open.kakao.com/o/pJBdCQgi" target="_blank" rel="noopener" data-product-cta="product_cta">카카오톡 문의</a>
+    <a class="product-cta-web" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener" data-product-cta="product_cta">3D로 내 건물 견적</a>
+  </div>
+</section>
+<div class="detail-tools"><div><b>자료 바로보기</b><span>13개 이미지 · 누르면 크게 볼 수 있습니다</span></div><nav aria-label="이 제품의 자료 바로가기"><a href="#detail-images">사진·도면 <span aria-hidden="true">↓</span></a><a href="#detail-diagram-1">물받이시스템 상세도 <span aria-hidden="true">↓</span></a></nav></div>
 <div class="fg s" id="detail-images" style="--c1:2;--c2:3;--c3:4;--ar:1.372"><figure class="tile"><a class="zoom" href="img/p/water_pan/002_water_pan_02.webp" data-cap="사각모음집"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/002_water_pan_02.webp"><img src="img/p/water_pan/002_water_pan_02.png" width="273" height="199" alt="물받이시스템 — 사각모음집" loading="lazy" decoding="async"></picture></div></a><figcaption>사각모음집</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/003_water_pan_03.webp" data-cap="유도모음집"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/003_water_pan_03.webp"><img src="img/p/water_pan/003_water_pan_03.png" width="273" height="199" alt="물받이시스템 — 유도모음집" loading="lazy" decoding="async"></picture></div></a><figcaption>유도모음집</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/004_water_pan_04.webp" data-cap="선홈통엘보"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/004_water_pan_04.webp"><img src="img/p/water_pan/004_water_pan_04.png" width="273" height="199" alt="물받이시스템 — 선홈통엘보" loading="lazy" decoding="async"></picture></div></a><figcaption>선홈통엘보</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/005_water_pan_05.webp" data-cap="선홈통"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/005_water_pan_05.webp"><img src="img/p/water_pan/005_water_pan_05.png" width="273" height="199" alt="물받이시스템 — 선홈통" loading="lazy" decoding="async"></picture></div></a><figcaption>선홈통</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/006_water_pan_06.webp" data-cap="물받이"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/006_water_pan_06.webp"><img src="img/p/water_pan/006_water_pan_06.png" width="273" height="199" alt="물받이시스템 — 물받이" loading="lazy" decoding="async"></picture></div></a><figcaption>물받이</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/007_water_pan_07.webp" data-cap="코너물받이(out)"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/007_water_pan_07.webp"><img src="img/p/water_pan/007_water_pan_07.png" width="273" height="199" alt="물받이시스템 — 코너물받이(out)" loading="lazy" decoding="async"></picture></div></a><figcaption>코너물받이(out)</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/008_water_pan_08.webp" data-cap="코너물받이(in)"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/008_water_pan_08.webp"><img src="img/p/water_pan/008_water_pan_08.png" width="273" height="199" alt="물받이시스템 — 코너물받이(in)" loading="lazy" decoding="async"></picture></div></a><figcaption>코너물받이(in)</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/009_water_pan_09.webp" data-cap="3단카바"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/009_water_pan_09.webp"><img src="img/p/water_pan/009_water_pan_09.png" width="273" height="199" alt="물받이시스템 — 3단카바" loading="lazy" decoding="async"></picture></div></a><figcaption>3단카바</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/010_water_pan_10.webp" data-cap="옆마개(좌,우)"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/010_water_pan_10.webp"><img src="img/p/water_pan/010_water_pan_10.png" width="273" height="199" alt="물받이시스템 — 옆마개(좌,우)" loading="lazy" decoding="async"></picture></div></a><figcaption>옆마개(좌,우)</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/011_water_pan_11.webp" data-cap="선홈통잡이쇠(반도)"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/011_water_pan_11.webp"><img src="img/p/water_pan/011_water_pan_11.png" width="273" height="199" alt="물받이시스템 — 선홈통잡이쇠(반도)" loading="lazy" decoding="async"></picture></div></a><figcaption>선홈통잡이쇠(반도)</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/012_water_pan_12.webp" data-cap="물받이 걸이쇠"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/012_water_pan_12.webp"><img src="img/p/water_pan/012_water_pan_12.png" width="273" height="199" alt="물받이시스템 — 물받이 걸이쇠" loading="lazy" decoding="async"></picture></div></a><figcaption>물받이 걸이쇠</figcaption></figure><figure class="tile"><a class="zoom" href="img/p/water_pan/013_water_pan_13.webp" data-cap="2단카바"><div class="ph" style="--w:273px"><picture><source type="image/webp" srcset="img/p/water_pan/013_water_pan_13.webp"><img src="img/p/water_pan/013_water_pan_13.png" width="273" height="199" alt="물받이시스템 — 2단카바" loading="lazy" decoding="async"></picture></div></a><figcaption>2단카바</figcaption></figure></div><figure class="fig" id="detail-diagram-1"><a class="zoom" href="img/p/water_pan/014_water_pan_01.webp" data-cap="물받이시스템 상세도"><picture><source type="image/webp" srcset="img/p/water_pan/014_water_pan_01.webp"><img src="img/p/water_pan/014_water_pan_01.png" width="761" height="757" alt="물받이시스템 — 물받이시스템 상세도" loading="lazy" decoding="async"></picture></a><figcaption>물받이시스템 상세도</figcaption></figure>
 <nav class="pager" aria-label="같은 분류 이전·다음"><a class="prev" href="flashing.html"><small>← 이전</small><b>후레싱</b></a><a class="next" href="clean_room.html"><small>다음 →</small><b>크린룸자재</b></a></nav>
 
@@ -144,6 +163,11 @@ HP: 010-4775-6318
   <a class="btn btn-line" href="tel:041-548-0484">전화 상담</a>
   <a class="btn btn-primary" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener">3D로 바로 견적 →</a>
 </div>
+<nav class="product-sticky-bar" aria-label="제품 견적 빠른 문의">
+  <a class="product-cta-call" href="tel:041-548-0484" data-product-cta="sticky_bar" aria-label="전화 문의 041-548-0484">전화 문의</a>
+  <a class="product-cta-kakao" href="https://open.kakao.com/o/pJBdCQgi" target="_blank" rel="noopener" data-product-cta="sticky_bar">카톡 문의</a>
+  <a class="product-cta-web" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener" data-product-cta="sticky_bar">3D 견적</a>
+</nav>
 <script src="assets/site.js?v=polish-20261011" defer></script>
 </body>
 </html>

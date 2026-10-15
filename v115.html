@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css?v=icons-20261015">
+<link rel="stylesheet" href="assets/site.css?v=cta-20261015">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.neo-panel.com/"}, {"@type": "ListItem", "position": 2, "name": "제품소개", "item": "https://www.neo-panel.com/products"}, {"@type": "ListItem", "position": 3, "name": "컬러강판", "item": "https://www.neo-panel.com/products#steel"}, {"@type": "ListItem", "position": 4, "name": "V-115"}]}</script>
 <link rel="manifest" href="/manifest.webmanifest">
 <!-- 방문 계측 GA4(사장님 2026-10-13 승인 「제안사항 다 해라」) — 화면에 보이는 것 없음 · 개인정보 수집 없음.
@@ -38,6 +38,14 @@
     document.addEventListener('click',function(e){
       try{
         var a=e.target&&e.target.closest?e.target.closest('a[href]'):null; if(!a)return;
+        var ctaWhere=a.getAttribute('data-product-cta');
+        if(ctaWhere==='product_cta'||ctaWhere==='sticky_bar'){
+          var ctaUrl=new URL(a.getAttribute('href'),location.href), ctaDest='';
+          if(ctaUrl.protocol==='tel:')ctaDest='call';
+          else if(ctaUrl.hostname==='open.kakao.com')ctaDest='kakao';
+          else if(ctaUrl.hostname==='junghakrok-prog.github.io')ctaDest='web';
+          if(ctaDest){gtag('event','homepage_to_app',{where:ctaWhere,dest:ctaDest});return;}
+        }
         var u=new URL(a.getAttribute('href'),location.href), dest='';
         if(u.hostname==='junghakrok-prog.github.io'){ if(/\/privacy\.html$/i.test(u.pathname))return; dest='web'; }
         else if(u.hostname==='play.google.com'&&u.searchParams.get('id')==='com.neopanel.quote3d')dest='play';
@@ -99,7 +107,18 @@
   <aside class="side" aria-label="컬러강판 메뉴"><div class="side-box"><h2>컬러강판</h2><ul><li><a href="zinc_panel.html">징크강판</a></li><li><a href="roof_panel.html">지붕강판</a></li><li><a href="louver_steel.html">루버강판</a></li><li><a href="v115.html" aria-current="page">V-115</a></li><li><a href="pe_foam.html">PE폼</a></li><li><a href="color_palette.html">색상표</a></li></ul></div><div class="side-help"><b>전화 상담</b><a class="tel" href="tel:041-548-0484">041-548-0484</a><a class="btn btn-primary" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener">3D로 바로 견적 →</a></div></aside>
   <article class="content">
 <h1>V-115</h1>
-<p class="lead">고온 환경에서의 사용에 적합하며 내식성과 내구성이 뛰어납니다.</p><div class="detail-tools"><div><b>자료 바로보기</b><span>2개 이미지 · 누르면 크게 볼 수 있습니다</span></div><nav aria-label="이 제품의 자료 바로가기"><a href="#detail-images">사진·도면 <span aria-hidden="true">↓</span></a><a href="#detail-section-1">홑강판 V-115 <span aria-hidden="true">↓</span></a><a href="#detail-diagram-1">▶ 제품형상 <span aria-hidden="true">↓</span></a></nav></div>
+<p class="lead">고온 환경에서의 사용에 적합하며 내식성과 내구성이 뛰어납니다.</p>
+<section class="product-cta" id="product_cta" aria-labelledby="product-cta-title">
+  <p class="product-cta-label">자재 견적 · 전문가 상담</p>
+  <h2 id="product-cta-title">이 자재 견적이 필요하신가요?</h2>
+  <p class="product-cta-copy">필요한 자재의 규격과 수량을 알려주시면 전문가 상담을 도와드립니다.</p>
+  <div class="product-cta-actions">
+    <a class="product-cta-call" href="tel:041-548-0484" data-product-cta="product_cta"><span>전화 견적 문의</span><span class="product-cta-phone">041-548-0484</span></a>
+    <a class="product-cta-kakao" href="https://open.kakao.com/o/pJBdCQgi" target="_blank" rel="noopener" data-product-cta="product_cta">카카오톡 문의</a>
+    <a class="product-cta-web" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener" data-product-cta="product_cta">3D로 내 건물 견적</a>
+  </div>
+</section>
+<div class="detail-tools"><div><b>자료 바로보기</b><span>2개 이미지 · 누르면 크게 볼 수 있습니다</span></div><nav aria-label="이 제품의 자료 바로가기"><a href="#detail-images">사진·도면 <span aria-hidden="true">↓</span></a><a href="#detail-section-1">홑강판 V-115 <span aria-hidden="true">↓</span></a><a href="#detail-diagram-1">▶ 제품형상 <span aria-hidden="true">↓</span></a></nav></div>
 <section class="sec"><h2 id="detail-section-1">홑강판 V-115</h2>
 <div class="pd"><figure class="fig pd-main" id="detail-images"><a class="zoom" href="img/p/v115/002_v115_01.webp" data-cap=""><picture><source type="image/webp" srcset="img/p/v115/002_v115_01.webp"><img src="img/p/v115/002_v115_01.png" width="509" height="221" alt="V-115 — 홑강판 V-115 — 사진 2" loading="lazy" decoding="async"></picture></a></figure><div class="pd-side"><figure class="fig cap-top" id="detail-diagram-1"><a class="zoom" href="img/p/v115/003_v115_02.webp" data-cap="▶ 제품형상"><picture><source type="image/webp" srcset="img/p/v115/003_v115_02-1000.webp 1000w, img/p/v115/003_v115_02.webp 1300w" sizes="(min-width:1024px) 880px, 100vw"><img src="img/p/v115/003_v115_02.png" width="1300" height="246" alt="V-115 — 홑강판 V-115 — 제품형상" loading="lazy" decoding="async"></picture></a><figcaption>▶ 제품형상</figcaption></figure></div></div>
 </section>
@@ -146,6 +165,11 @@ HP: 010-4775-6318
   <a class="btn btn-line" href="tel:041-548-0484">전화 상담</a>
   <a class="btn btn-primary" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener">3D로 바로 견적 →</a>
 </div>
+<nav class="product-sticky-bar" aria-label="제품 견적 빠른 문의">
+  <a class="product-cta-call" href="tel:041-548-0484" data-product-cta="sticky_bar" aria-label="전화 문의 041-548-0484">전화 문의</a>
+  <a class="product-cta-kakao" href="https://open.kakao.com/o/pJBdCQgi" target="_blank" rel="noopener" data-product-cta="sticky_bar">카톡 문의</a>
+  <a class="product-cta-web" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener" data-product-cta="sticky_bar">3D 견적</a>
+</nav>
 <script src="assets/site.js?v=polish-20261011" defer></script>
 </body>
 </html>

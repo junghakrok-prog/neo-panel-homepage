@@ -956,3 +956,30 @@ body{padding-bottom:calc(72px + env(safe-area-inset-bottom))}
 .cta-txt{display:grid;grid-template-columns:72px minmax(0,1fr);column-gap:18px;align-items:center}
 .cta-txt .nx-ico{grid-row:1 / span 2;width:72px;height:72px}
 @media (max-width:479.98px){.cta-txt{grid-template-columns:56px minmax(0,1fr);column-gap:12px}.cta-txt .nx-ico{width:56px;height:56px;align-self:start}.steps3 li>.nx-ico{width:42px;height:42px}.str.has-ico{grid-template-columns:56px minmax(0,1fr);gap:14px}.str.has-ico .nx-ico{width:56px;height:56px}}
+
+/* 2026-10-15 제품 설명 직후 문의 · 모바일 빠른 문의 */
+.product-cta{margin:26px 0 30px;padding:26px;border:2px solid #c65000;border-radius:18px;background:#fff9f1;box-shadow:0 6px 22px #6c39000a}
+.product-cta-label{font-size:15px;font-weight:800;color:var(--orange-text);margin-bottom:8px}
+.product-cta h2{font-size:25px;line-height:1.4;letter-spacing:-.035em}
+.product-cta-copy{margin-top:10px;color:#4c565d;font-size:17px;line-height:1.7}
+.product-cta-actions{display:grid;grid-template-columns:1.35fr 1fr 1.15fr;gap:10px;margin-top:20px}
+.product-cta-actions a,.product-sticky-bar a{display:flex;align-items:center;justify-content:center;gap:4px 8px;min-width:0;min-height:56px;padding:12px;border:1px solid transparent;border-radius:10px;font-size:17px;font-weight:800;line-height:1.5;text-align:center;text-decoration:none}
+.product-cta-actions a{flex-wrap:wrap}
+.product-cta-call{background:#172832;color:#fff}
+.product-cta-kakao{background:#fee500;color:#251d00;border-color:#d9c600!important}
+.product-cta-web{background:var(--action);color:#fff}
+.product-cta-actions a:hover,.product-sticky-bar a:hover{filter:brightness(.94)}
+.product-cta-actions a:focus-visible,.product-sticky-bar a:focus-visible{outline:3px solid #1f4e8c;outline-offset:3px}
+.product-cta-phone{white-space:nowrap}
+.product-sticky-bar{display:none}
+@media (max-width:1079.98px){.product-cta-actions{grid-template-columns:1fr}.product-cta-actions a{min-height:54px}}
+@media (max-width:768px){
+  body.product-detail{padding-bottom:calc(86px + env(safe-area-inset-bottom,0px))}
+  .product-detail .dock{display:none}
+  .product-cta{padding:22px 18px;margin-top:24px}
+  .product-cta h2{font-size:23px}
+  .product-cta-actions{margin-top:18px}
+  .product-sticky-bar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:#fff;border-top:1px solid #d7dfe3;box-shadow:0 -4px 20px #17283214}
+  .product-sticky-bar a{min-height:56px;padding:10px 4px;font-size:17px}
+  .site-head.open~.product-sticky-bar{display:none}
+}

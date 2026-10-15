@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800&amp;display=swap">
-<link rel="stylesheet" href="assets/site.css?v=icons-20261015">
+<link rel="stylesheet" href="assets/site.css?v=cta-20261015">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "홈", "item": "https://www.neo-panel.com/"}, {"@type": "ListItem", "position": 2, "name": "제품소개", "item": "https://www.neo-panel.com/products"}, {"@type": "ListItem", "position": 3, "name": "세라믹사이딩", "item": "https://www.neo-panel.com/products#ceramic"}, {"@type": "ListItem", "position": 4, "name": "세라믹사이딩 부자재"}]}</script>
 <link rel="manifest" href="/manifest.webmanifest">
 <!-- 방문 계측 GA4(사장님 2026-10-13 승인 「제안사항 다 해라」) — 화면에 보이는 것 없음 · 개인정보 수집 없음.
@@ -38,6 +38,14 @@
     document.addEventListener('click',function(e){
       try{
         var a=e.target&&e.target.closest?e.target.closest('a[href]'):null; if(!a)return;
+        var ctaWhere=a.getAttribute('data-product-cta');
+        if(ctaWhere==='product_cta'||ctaWhere==='sticky_bar'){
+          var ctaUrl=new URL(a.getAttribute('href'),location.href), ctaDest='';
+          if(ctaUrl.protocol==='tel:')ctaDest='call';
+          else if(ctaUrl.hostname==='open.kakao.com')ctaDest='kakao';
+          else if(ctaUrl.hostname==='junghakrok-prog.github.io')ctaDest='web';
+          if(ctaDest){gtag('event','homepage_to_app',{where:ctaWhere,dest:ctaDest});return;}
+        }
         var u=new URL(a.getAttribute('href'),location.href), dest='';
         if(u.hostname==='junghakrok-prog.github.io'){ if(/\/privacy\.html$/i.test(u.pathname))return; dest='web'; }
         else if(u.hostname==='play.google.com'&&u.searchParams.get('id')==='com.neopanel.quote3d')dest='play';
@@ -101,7 +109,18 @@
   <aside class="side" aria-label="세라믹사이딩 메뉴"><div class="side-box"><h2>세라믹사이딩</h2><ul><li><a href="ceramic_advantages.html">특장점</a></li><li><a href="v_series.html">브이시리즈</a></li><li><a href="k_series.html">케이시리즈</a></li><li><a href="operia_series.html">오페리아시리즈</a></li><li><a href="premium_series.html">프리미엄시리즈</a></li><li><a href="ceramic_accessories.html" aria-current="page">부자재</a></li><li><a href="ceramic_sub_materials.html">하지자재</a></li></ul></div><div class="side-help"><b>전화 상담</b><a class="tel" href="tel:041-548-0484">041-548-0484</a><a class="btn btn-primary" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener">3D로 바로 견적 →</a></div></aside>
   <article class="content">
 <h1>세라믹사이딩 부자재</h1>
-<p class="lead">세라믹사이딩과 함께 사용되는 보조 재료로, 건축물의 외관을 더욱 고급스럽고 견고하게 만들어줍니다.</p><div class="detail-tools"><div><b>자료 바로보기</b><span>55개 이미지 · 누르면 크게 볼 수 있습니다</span></div><nav aria-label="이 제품의 자료 바로가기"><a href="#detail-images">사진·도면 <span aria-hidden="true">↓</span></a><a href="#detail-section-1">컷팅자 <span aria-hidden="true">↓</span></a><a href="#detail-section-2">후레슁 <span aria-hidden="true">↓</span></a><a href="#detail-section-3">기타 <span aria-hidden="true">↓</span></a><a href="#detail-section-4">부자재 규격 <span aria-hidden="true">↓</span></a><a href="#detail-section-5">징크 후레슁 <span aria-hidden="true">↓</span></a><a href="#detail-section-6">클립 부자재 <span aria-hidden="true">↓</span></a><a href="#detail-section-7">시공 순서 <span aria-hidden="true">↓</span></a><a href="#detail-section-8">시공 상세도 <span aria-hidden="true">↓</span></a></nav></div>
+<p class="lead">세라믹사이딩과 함께 사용되는 보조 재료로, 건축물의 외관을 더욱 고급스럽고 견고하게 만들어줍니다.</p>
+<section class="product-cta" id="product_cta" aria-labelledby="product-cta-title">
+  <p class="product-cta-label">자재 견적 · 전문가 상담</p>
+  <h2 id="product-cta-title">이 자재 견적이 필요하신가요?</h2>
+  <p class="product-cta-copy">필요한 자재의 규격과 수량을 알려주시면 전문가 상담을 도와드립니다.</p>
+  <div class="product-cta-actions">
+    <a class="product-cta-call" href="tel:041-548-0484" data-product-cta="product_cta"><span>전화 견적 문의</span><span class="product-cta-phone">041-548-0484</span></a>
+    <a class="product-cta-kakao" href="https://open.kakao.com/o/pJBdCQgi" target="_blank" rel="noopener" data-product-cta="product_cta">카카오톡 문의</a>
+    <a class="product-cta-web" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener" data-product-cta="product_cta">3D로 내 건물 견적</a>
+  </div>
+</section>
+<div class="detail-tools"><div><b>자료 바로보기</b><span>55개 이미지 · 누르면 크게 볼 수 있습니다</span></div><nav aria-label="이 제품의 자료 바로가기"><a href="#detail-images">사진·도면 <span aria-hidden="true">↓</span></a><a href="#detail-section-1">컷팅자 <span aria-hidden="true">↓</span></a><a href="#detail-section-2">후레슁 <span aria-hidden="true">↓</span></a><a href="#detail-section-3">기타 <span aria-hidden="true">↓</span></a><a href="#detail-section-4">부자재 규격 <span aria-hidden="true">↓</span></a><a href="#detail-section-5">징크 후레슁 <span aria-hidden="true">↓</span></a><a href="#detail-section-6">클립 부자재 <span aria-hidden="true">↓</span></a><a href="#detail-section-7">시공 순서 <span aria-hidden="true">↓</span></a><a href="#detail-section-8">시공 상세도 <span aria-hidden="true">↓</span></a></nav></div>
 <section class="sec"><h2 id="detail-section-1">컷팅자</h2>
 <div class="fg wide" id="detail-images" style="--c1:2;--c2:3;--c3:3;--ar:1.833"><figure class="tile"><a class="zoom" href="img/p/ceramic_accessories/002_ceramic_accessories11.jpg" data-cap="세라믹사이딩 컷팅자 600mm"><div class="ph" style="--w:550px"><picture><img src="img/p/ceramic_accessories/002_ceramic_accessories11.jpg" width="550" height="300" alt="세라믹사이딩 부자재 — 컷팅자 — 세라믹사이딩컷팅자600mm" loading="lazy" decoding="async"></picture></div></a><figcaption><b class="cap-name">세라믹사이딩 컷팅자 600mm</b></figcaption></figure><figure class="tile"><a class="zoom" href="img/p/ceramic_accessories/003_ceramic_accessories12.jpg" data-cap="세라믹사이딩 컷팅자 1,200mm"><div class="ph" style="--w:550px"><picture><img src="img/p/ceramic_accessories/003_ceramic_accessories12.jpg" width="550" height="300" alt="세라믹사이딩 부자재 — 컷팅자 — 세라믹사이딩컷팅자1200mm" loading="lazy" decoding="async"></picture></div></a><figcaption><b class="cap-name">세라믹사이딩 컷팅자 1,200mm</b></figcaption></figure></div>
 </section>
@@ -193,6 +212,11 @@ HP: 010-4775-6318
   <a class="btn btn-line" href="tel:041-548-0484">전화 상담</a>
   <a class="btn btn-primary" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener">3D로 바로 견적 →</a>
 </div>
+<nav class="product-sticky-bar" aria-label="제품 견적 빠른 문의">
+  <a class="product-cta-call" href="tel:041-548-0484" data-product-cta="sticky_bar" aria-label="전화 문의 041-548-0484">전화 문의</a>
+  <a class="product-cta-kakao" href="https://open.kakao.com/o/pJBdCQgi" target="_blank" rel="noopener" data-product-cta="sticky_bar">카톡 문의</a>
+  <a class="product-cta-web" href="https://junghakrok-prog.github.io/" target="_blank" rel="noopener" data-product-cta="sticky_bar">3D 견적</a>
+</nav>
 <script src="assets/site.js?v=polish-20261011" defer></script>
 </body>
 </html>
