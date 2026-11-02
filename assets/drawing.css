@@ -1,0 +1,149 @@
+/* ㈜네오판넬 — 도면 견적(2026-11-02 시안)
+   1) 홈 맨 위 「도면 견적」 컷 넘김 카드(.dq)  2) 도면 견적 요청란(drawing_request.html, .rq)
+   site.css 의 색·글꼴 토큰(--action, --ink, --paper …)을 그대로 쓴다. 손님 연령 50~60대 → 본문 17px 이상, 버튼 52px 이상. */
+
+/* ── 1. 컷 넘김 카드 ───────────────────────────── */
+.dq{background:linear-gradient(180deg,#eaf4fc 0%,var(--paper) 100%);padding:16px 0 18px}
+.dq-card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:0 10px 30px rgba(20,26,31,.08);overflow:hidden}
+.dq-track{display:flex;align-items:flex-start;overflow-x:auto;overflow-y:hidden;transition:height .3s ease;scroll-snap-type:x mandatory;scroll-behavior:smooth;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain}
+.dq-track::-webkit-scrollbar{display:none}
+.dq-track:focus-visible{outline:3px solid var(--orange);outline-offset:-3px}
+@media (prefers-reduced-motion:reduce){.dq-track{scroll-behavior:auto;transition:none}}
+.dq-slide{flex:0 0 100%;scroll-snap-align:start;scroll-snap-stop:always;display:flex;flex-direction:column;min-width:0}
+.dq-pic{position:relative;aspect-ratio:3/2;background:#1b232a;overflow:hidden}
+.dq-pic img{width:100%;height:100%;object-fit:cover}
+.dq-badge{position:absolute;left:10px;top:10px;background:rgba(20,26,31,.82);color:#fff;font-size:15px;font-weight:700;line-height:1.3;border-radius:8px;padding:5px 10px}
+.dq-txt{padding:16px 18px 6px}
+.dq-kick{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:var(--orange-text);margin-bottom:6px}
+.dq-no{display:inline-block;background:var(--ink);color:#fff;border-radius:999px;padding:2px 10px;font-size:15px;font-weight:700;letter-spacing:.02em}
+.dq-txt h2{font-size:27px;line-height:1.28;font-weight:800;color:var(--ink);letter-spacing:-.03em}
+.dq-ok{color:#2e7d32}
+.dq-desc{font-size:17.5px;line-height:1.6;color:#33393f;margin-top:8px}
+.dq-cta{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.dq-cta .btn{width:100%;min-height:56px;font-size:18px;white-space:normal;text-align:center}
+.dq-go{font-size:19px!important}
+.dq-yt svg{width:24px;height:24px}
+
+.dq-ctl{display:flex;align-items:center;gap:6px;padding:8px 10px 12px}
+.dq-arrow{flex:none;width:52px;height:52px;border-radius:50%;border:1.5px solid var(--line-2);background:#fff;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.dq-arrow:hover{border-color:var(--ink)}
+.dq-dots{flex:1;display:flex;justify-content:center;align-items:center;gap:0;min-width:0}
+.dq-dot{flex:1 1 0;min-width:26px;max-width:40px;width:30px;height:44px;border:0;background:none;padding:0;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.dq-dot::before{content:"";width:11px;height:11px;border-radius:999px;background:#c9c6bd;transition:width .2s ease,background .2s ease}
+.dq-dot[aria-selected="true"]::before{width:26px;background:var(--action)}
+.dq-play{position:absolute;right:10px;top:10px;z-index:2;min-width:64px;height:44px;border-radius:10px;border:1.5px solid rgba(255,255,255,.7);background:rgba(255,255,255,.92);box-shadow:0 2px 8px rgba(0,0,0,.18);font:inherit;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer;padding:0 10px}
+.dq-play[aria-pressed="false"]{background:var(--warm);border-color:#f0c79a;color:var(--orange-text)}
+
+.dq-quick{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;margin-top:12px;min-height:60px;border-radius:14px;background:linear-gradient(180deg,var(--action),var(--action-deep));color:#fff;text-decoration:none;text-align:center;padding:10px 16px;box-shadow:0 6px 18px rgba(211,84,0,.22)}
+.dq-at-last .dq-quick{visibility:hidden}
+.dq-quick b{font-size:19px;line-height:1.3}
+.dq-quick span{font-size:15.5px;opacity:.95;line-height:1.4}
+
+/* 태블릿·PC: 그림 왼쪽 · 글 오른쪽 */
+@media (min-width:720px){
+  .dq{padding:22px 0 24px}
+  .dq-slide{flex-direction:row;align-items:stretch}
+  .dq-pic{flex:0 0 58%;aspect-ratio:3/2}
+  .dq-txt{flex:1;display:flex;flex-direction:column;justify-content:center;padding:22px 26px}
+  .dq-txt h2{font-size:30px}
+  .dq-ctl{position:absolute;right:0;bottom:0;width:42%;padding:0 18px 16px;justify-content:flex-start}
+  .dq-txt{padding-bottom:84px}
+  .dq-quick{flex-direction:row;gap:14px}
+}
+@media (min-width:1024px){
+  .dq-txt{padding:28px 36px 92px}
+  .dq-kick{font-size:17px}
+  .dq-txt h2{font-size:40px}
+  .dq-desc{font-size:19px}
+  .dq-cta{flex-direction:column}
+  .dq-ctl{padding:0 30px 20px}
+  .dq-badge{font-size:16px;left:14px;top:14px}
+  .dq-play{right:16px;top:16px}
+  .dq-quick b{font-size:20px}
+  .dq-quick span{font-size:17px}
+}
+
+/* ── 2. 도면 견적 요청란 ───────────────────────── */
+.rq-wrap{max-width:820px;margin:0 auto;padding:0 var(--gut) 40px}
+.rq-promise{display:flex;gap:12px;align-items:flex-start;background:var(--warm);border:1px solid #f0c79a;border-radius:var(--r);padding:14px 16px;margin:4px 0 18px;font-size:17.5px;line-height:1.6;color:#3a2a14}
+.rq-promise b{color:var(--orange-text)}
+.rq-steps{display:grid;grid-template-columns:1fr;gap:8px;margin:0 0 20px;padding:0;list-style:none;counter-reset:rqs}
+.rq-steps li{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-size:17px;font-weight:700}
+.rq-steps li span{flex:none;width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:16px}
+@media (min-width:720px){.rq-steps{grid-template-columns:repeat(3,1fr)}}
+
+.rq-form{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:20px 18px;box-shadow:0 8px 24px rgba(20,26,31,.06)}
+@media (min-width:720px){.rq-form{padding:28px 30px}}
+.rq-f{margin:0 0 22px;border:0;padding:0;min-width:0}
+.rq-f>label:not(.rq-agree),.rq-f>legend,.rq-lab{display:block;font-size:19px;font-weight:800;color:var(--ink);margin-bottom:8px;padding:0}
+.rq-req,.rq-opt{display:inline-block;margin-left:8px;font-size:14.5px;font-weight:800;border-radius:6px;padding:1px 8px;vertical-align:2px}
+.rq-req{background:#fde8e6;color:var(--red-text)}
+.rq-opt{background:#ecebe6;color:var(--muted)}
+.rq-help{font-size:16px;color:var(--muted);margin:-2px 0 8px;line-height:1.55}
+.rq-in,.rq-sel,.rq-ta{width:100%;font:inherit;font-size:19px;color:var(--ink);background:#fff;border:2px solid var(--line-2);border-radius:12px;min-height:58px;padding:10px 14px}
+.rq-ta{min-height:130px;line-height:1.6;resize:vertical}
+.rq-in:focus,.rq-sel:focus,.rq-ta:focus{outline:none;border-color:var(--action);box-shadow:0 0 0 3px rgba(198,80,0,.16)}
+.rq-in::placeholder,.rq-ta::placeholder{color:#8a8f94}
+.rq-row{display:grid;grid-template-columns:1fr;gap:10px}
+@media (min-width:560px){.rq-row{grid-template-columns:200px 1fr}}
+.rq-bad .rq-in,.rq-bad .rq-sel,.rq-bad .rq-ta,.rq-bad .rq-drop,.rq-bad .rq-agree{border-color:var(--red-text)!important;background:#fff8f7}
+.rq-err{display:none;margin-top:8px;font-size:17px;font-weight:800;color:var(--red-text)}
+.rq-bad .rq-err{display:block}
+
+.rq-chips{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (min-width:720px){.rq-chips{grid-template-columns:repeat(6,1fr)}}
+.rq-chip{position:relative}
+.rq-chip input{position:absolute;opacity:0;width:1px;height:1px}
+.rq-chip span{display:flex;align-items:center;justify-content:center;min-height:56px;border:2px solid var(--line-2);border-radius:12px;font-size:18px;font-weight:700;color:var(--ink);background:#fff;cursor:pointer;text-align:center;padding:4px}
+.rq-chip input:checked+span{border-color:var(--action);background:var(--warm);color:var(--orange-text);box-shadow:inset 0 0 0 1px var(--action)}
+.rq-chip input:focus-visible+span{outline:3px solid var(--orange);outline-offset:2px}
+.rq-etc{margin-top:10px}
+
+.rq-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;text-align:center;border:2.5px dashed #c9b49a;background:var(--ivory);border-radius:16px;padding:20px 14px;cursor:pointer;transition:background .15s ease,border-color .15s ease}
+.rq-drop:hover,.rq-drop.over{background:var(--warm);border-color:var(--action)}
+.rq-drop svg{width:44px;height:44px;color:var(--action)}
+.rq-drop b{font-size:20px;color:var(--ink)}
+.rq-drop small{font-size:16px;color:var(--muted);line-height:1.5}
+.rq-drop .btn{margin-top:6px;pointer-events:none}
+.rq-file-input{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.rq-files{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.rq-files li{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:8px 8px 8px 12px;background:#fff;font-size:17px}
+.rq-files .ext{flex:none;min-width:52px;text-align:center;font-size:14px;font-weight:800;color:#fff;background:var(--ink-3);border-radius:6px;padding:3px 6px}
+.rq-files .ext.pdf{background:#c62828}.rq-files .ext.cad{background:#1f4e8c}.rq-files .ext.img{background:#2e7d32}
+.rq-files .nm{flex:1;min-width:0;overflow-wrap:anywhere;word-break:break-all;line-height:1.4;font-weight:700}
+.rq-files .sz{flex:none;color:var(--muted);font-size:15.5px}
+.rq-files .rm{flex:none;min-width:64px;min-height:44px;border-radius:10px;border:1.5px solid var(--line-2);background:#fff;font:inherit;font-size:16px;font-weight:700;color:var(--ink);cursor:pointer}
+.rq-files .rm:hover{border-color:var(--red-text);color:var(--red-text)}
+.rq-filemsg{margin-top:8px;font-size:17px;font-weight:700;color:var(--red-text)}
+.rq-filemsg:empty{display:none}
+
+.rq-privacy{border:1px solid var(--line);border-radius:12px;background:var(--tint);padding:12px 14px;font-size:16.5px;line-height:1.65;color:#2c3338}
+.rq-privacy dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.rq-privacy dt{font-weight:800;white-space:nowrap}
+.rq-privacy dd{margin:0}
+@media (max-width:519.98px){.rq-privacy dl{grid-template-columns:1fr}.rq-privacy dt{margin-top:6px}}
+.rq-f>.rq-agree{display:flex;align-items:center;gap:12px;margin-top:10px;border:2px solid var(--line-2);border-radius:12px;padding:12px 14px;cursor:pointer;font-size:18.5px;font-weight:800;color:var(--ink);background:#fff}
+.rq-f>.rq-agree input{flex:none;width:28px;height:28px;accent-color:var(--action);margin:0}
+
+.rq-note{font-size:16.5px;color:var(--muted);line-height:1.6;margin:0 0 14px}
+.rq-send{width:100%;min-height:64px;font-size:21px;border-radius:14px}
+.rq-send[disabled]{opacity:.6;cursor:wait}
+.rq-alt{margin-top:14px;font-size:16.5px;color:var(--muted);text-align:center;line-height:1.6}
+.rq-alt a{display:inline-block;padding:8px 2px;color:var(--orange-text);font-weight:800}
+.rq-help a{display:inline-block;padding:6px 0}
+.rq-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+
+.rq-done{background:#fff;border:2px solid #2e7d32;border-radius:var(--r-lg);padding:26px 18px;text-align:center;box-shadow:0 8px 24px rgba(20,26,31,.06)}
+.rq-done:focus{outline:none}
+.rq-done .ok{width:76px;height:76px;margin:0 auto 10px;border-radius:50%;background:#2e7d32;color:#fff;display:flex;align-items:center;justify-content:center}
+.rq-done .ok svg{width:44px;height:44px}
+.rq-done h2{font-size:28px;font-weight:800;color:var(--ink);line-height:1.35}
+.rq-done p{font-size:18px;color:#33393f;margin-top:8px;line-height:1.6}
+.rq-done .calls{display:flex;flex-direction:column;gap:10px;margin:20px auto 0;max-width:460px}
+.rq-done .calls .btn{min-height:60px;font-size:19px;white-space:normal}
+.rq-done .calls small{display:block;font-size:15px;font-weight:600;opacity:.9}
+.rq-done .calls .btn{flex-direction:column;gap:0;line-height:1.3;padding:8px 18px}
+.rq-done .home{display:inline-block;margin-top:16px;font-size:17px;font-weight:700;color:var(--ink)}
+
+/* 요청란에서는 아래 고정 띠(전화 상담·3D 견적)를 숨긴다 — 보내기 버튼을 가리지 않게. 전화는 폼 아래·접수 화면에 있다 */
+.rq-page .dock{display:none!important}
