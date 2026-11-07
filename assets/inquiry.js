@@ -31,7 +31,7 @@
   function resolve(ctx,stored){
     var q=new URLSearchParams(ctx.search||''), alias=source(ctx.alias), tagged=source(q.get('utm_source'));
     var incoming=alias||tagged||refSource(ctx.referrer,ctx.hostname);
-    if(incoming)return {source:incoming,campaign:campaign(q.get('v')||q.get('utm_campaign'))||(alias?'profile':''),at:ctx.now};
+    if(incoming)return {source:incoming,campaign:campaign(q.get('v')||q.get('utm_campaign')),at:ctx.now};
     if(stored&&source(stored.source)&&typeof stored.at==='number'&&stored.at<=ctx.now&&ctx.now-stored.at<TTL)return {source:source(stored.source),campaign:campaign(stored.campaign),at:stored.at};
     return {source:'direct',campaign:'',at:ctx.now};
   }

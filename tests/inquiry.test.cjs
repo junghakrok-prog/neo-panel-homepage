@@ -18,7 +18,7 @@ test('search and referring channels are separated without retaining raw URLs',()
 });
 test('unknown tracking values and malformed storage cannot inject inquiry text',()=>{
  for(const source of ['01012345678','<script>alert(1)</script>','__proto__'])assert.equal(api.resolve({...ctx,search:'?utm_source='+encodeURIComponent(source)},null).source,'direct');
- assert.equal(api.resolve({...ctx,alias:'youtube',search:'?v=person%40mail.com'},null).campaign,'profile');
+ assert.equal(api.resolve({...ctx,alias:'youtube',search:'?v=person%40mail.com'},null).campaign,'');
  assert.equal(api.resolve({...ctx},{source:'arbitrary-name',at:now}).source,'direct');
 });
 test('local preview and production events use separate paths; analytics contains no inquiry body',()=>{
