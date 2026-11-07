@@ -1,0 +1,45 @@
+/* 도면 문의 전용. 기존 제품/앱 콘텐츠의 크기·계산에는 영향 없음. */
+.home-quote-intro{margin:16px 0 0;color:#3b4b59;font-size:18px;font-weight:700;line-height:1.6}
+.home-hero .hero-cta{display:grid;grid-template-columns:1fr;gap:10px}
+.home-hero .hero-cta .btn{min-height:58px;white-space:normal;text-align:center;line-height:1.5}
+.quote-app-preview{font-size:16px;color:#315b82;padding:4px 0}
+.nav-drawing a{color:var(--orange-text);font-weight:800;white-space:nowrap}
+@media(min-width:1024px) and (max-width:1439.98px){.nav-drawing{display:none}}
+.mp-cta{flex-wrap:wrap}
+.drawing-dock{grid-template-columns:1.1fr .8fr 1fr!important;gap:6px!important}
+.drawing-dock .btn{padding:10px 5px;font-size:15px;line-height:1.4;text-align:center;white-space:normal;min-width:0}
+.quote-page{background:#f7f9fb}
+.quote-main{padding-bottom:64px}
+.quote-intro{padding-top:44px;padding-bottom:30px}
+.quote-intro h1{font-size:clamp(29px,4.2vw,46px);line-height:1.4;letter-spacing:-.035em;margin:14px 0}
+.quote-intro h1 em{font-style:normal;color:#a84400}
+.quote-lead{font-size:20px;line-height:1.8;color:#3b4b59}
+.quote-caption{font-size:16px;line-height:1.75;color:#4b5d6c;margin-top:14px}
+.quote-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start}
+.quote-card{background:white;border:1px solid #d7e0e8;border-radius:20px;padding:30px;min-width:0;box-shadow:0 8px 24px #173f6010}
+.quote-card-main{border:2px solid #c65000}
+.quote-card h2,.quote-call h2,.quote-guide h2,.quote-self h2{font-size:25px;line-height:1.5;letter-spacing:-.025em;margin:8px 0 12px}
+.quote-card p{line-height:1.8;font-size:18px}
+.quote-action{display:flex;align-items:center;justify-content:center;width:100%;min-height:60px;margin-top:16px;padding:12px 16px;box-sizing:border-box;font-size:20px;text-align:center;white-space:normal;line-height:1.5}
+.quote-kakao{background:#fee500;color:#251d00;border:1px solid #dac700}
+.quote-small{margin-top:8px;font-size:17px;min-height:44px;cursor:pointer}
+.quote-card .quote-address{font-size:22px;font-weight:800;overflow-wrap:anywhere;margin-top:16px}
+.quote-template{margin-top:20px;font-size:17px}
+.quote-template summary{cursor:pointer;min-height:44px;line-height:1.6}
+.quote-template textarea{display:block;box-sizing:border-box;width:100%;resize:vertical;padding:14px;font:inherit;font-size:17px;line-height:1.7;border:1px solid #b9c9d5;border-radius:10px;margin-top:8px;background:#f8fafc;color:#172832}
+.quote-template p{font-size:16px}
+.quote-call{display:flex;gap:20px;justify-content:space-between;align-items:center;background:#eaf2f8;border-radius:18px;padding:26px 30px;margin-top:24px}
+.quote-call p{font-size:18px}
+.quote-call .btn{min-height:58px;white-space:nowrap}
+.quote-guide{padding-top:36px}
+.quote-guide ol{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;list-style:none;padding:0;margin-top:16px}
+.quote-guide li{background:#fff;border:1px solid #d7e0e8;border-radius:14px;padding:20px}
+.quote-guide li b{display:block;font-size:20px}.quote-guide li span{display:block;font-size:17px;line-height:1.7;margin-top:8px}
+.quote-feedback{font-size:18px;color:#205239;font-weight:700;line-height:1.7;min-height:32px}
+.quote-self{border-top:1px solid #d7e0e8;margin-top:28px;padding-top:28px}.quote-self p{font-size:18px;line-height:1.7}.quote-self .btn{margin-top:16px}
+.video-quote-entry{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:24px;margin-bottom:24px;padding:24px;background:#fff6e9;border:1px solid #e4c49a;border-radius:16px}
+.video-quote-entry b{font-size:23px}.video-quote-entry p{font-size:18px;line-height:1.7;margin-top:6px}
+@media(max-width:719.98px){
+ .quote-intro{padding-top:28px}.quote-lead{font-size:18px}.quote-grid{grid-template-columns:1fr;gap:18px}.quote-card{padding:24px 20px}.quote-call{flex-direction:column;align-items:stretch;padding:24px 20px}.quote-call .btn{white-space:normal;text-align:center;font-size:18px}.quote-guide ol{grid-template-columns:1fr;gap:10px}.quote-guide li{padding:18px}.video-quote-entry{flex-direction:column;align-items:stretch}.video-quote-entry .btn{text-align:center;font-size:18px}.home-quote-intro{font-size:17px}.home-hero .hero-cta .btn{font-size:18px!important;min-height:58px}.quote-main{padding-bottom:28px}
+}
+.quote-page .a2hs{display:none}
