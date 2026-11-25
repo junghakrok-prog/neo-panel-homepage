@@ -1,0 +1,6 @@
+@media (min-width:1024px) and (max-width:1199.98px){
+  .site-head .head-in,.site-head .head-actions{gap:4px}
+  .site-head .head-tel{padding-inline:2px}
+  .site-head .nav{margin-left:0;gap:0}
+  .site-head .nav>li>a{padding-inline:4px;font-size:15px}
+}
